@@ -1,15 +1,13 @@
-# AutoRequire
+# Equire
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/auto_require`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+You can forget `require`.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'auto_require'
+gem 'equire'
 ```
 
 And then execute:
@@ -18,11 +16,23 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install auto_require
+    $ gem install equire
 
 ## Usage
 
-TODO: Write usage instructions here
+**DO NOT USE THIS GEM ON PRODUCTION**
+
+For example:
+
+```bash
+# It does not work. You need `require 'uri'`
+$ ruby -e 'p URI.parse("https://example.com")'
+-e:1:in `<main>': uninitialized constant URI (NameError)
+
+# But if you add `-require` option to ruby, it works!
+$ ruby -require -e 'p URI.parse("https://example.com")'
+#<URI::HTTPS https://example.com>
+```
 
 ## Development
 
@@ -32,4 +42,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/pocke/auto_require.
+Bug reports and pull requests are welcome on GitHub at https://github.com/pocke/equire.

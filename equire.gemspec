@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Masataka Pocke Kuwabara"]
   spec.email         = ["kuwabara@pocke.me"]
 
-  spec.summary       = %q{require standard libraries automatically}
-  spec.description   = %q{require standard libraries automatically}
+  spec.summary       = %q{You can forget `require`.}
+  spec.description   = %q{You can forget `require`.}
   spec.homepage      = "https://github.com/pocke/equire"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
