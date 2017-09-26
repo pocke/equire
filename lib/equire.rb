@@ -1,4 +1,4 @@
-require "auto_require/version"
+require "equire/version"
 
 # TODO: DRb has many modules. https://docs.ruby-lang.org/ja/latest/library/drb.html
 # TODO: net/* https://docs.ruby-lang.org/ja/latest/library/index.html
@@ -11,7 +11,7 @@ require "auto_require/version"
 # TODO: rinda https://docs.ruby-lang.org/ja/latest/library/rinda=2frinda.html
 # TODO: rubygems https://docs.ruby-lang.org/ja/latest/library/rubygems.html
 
-module AutoRequire
+module Equire
   SimpleModules = %i[
     PTY Readline Shell
     Kconv NKF

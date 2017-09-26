@@ -1,3 +1,3 @@
-module AutoRequire
+module Equire
   VERSION = "0.1.0"
 end

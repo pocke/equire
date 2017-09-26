@@ -1,17 +1,17 @@
 # coding: utf-8
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "auto_require/version"
+require "equire/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "auto_require"
-  spec.version       = AutoRequire::VERSION
+  spec.name          = "equire"
+  spec.version       = Equire::VERSION
   spec.authors       = ["Masataka Pocke Kuwabara"]
   spec.email         = ["kuwabara@pocke.me"]
 
   spec.summary       = %q{require standard libraries automatically}
   spec.description   = %q{require standard libraries automatically}
-  spec.homepage      = "https://github.com/pocke/auto_require"
+  spec.homepage      = "https://github.com/pocke/equire"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
