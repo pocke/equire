@@ -72,6 +72,11 @@ module Equire
     OpenStruct: 'ostruct',
   }.freeze
 
+  InstanceMethods = [
+    [IO, :expect, 'expect'],
+    [Time, :to_json, 'json']
+  ].freeze
+
   def Object.const_missing(name)
     case
     when SimpleModules.include?(name)
@@ -84,5 +89,16 @@ module Equire
     else
       super
     end
+  end
+
+  InstanceMethods.each do |klass, method, library|
+    eval <<~RUBY
+      #{klass.is_a?(Class) ? 'class' : 'module'} ::#{klass}
+        def #{method}(*)
+          require #{library.inspect}
+          super
+        end
+      end
+    RUBY
   end
 end
