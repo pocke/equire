@@ -10,6 +10,7 @@ require "equire/version"
 # TODO: racc/parser https://docs.ruby-lang.org/ja/latest/library/racc=2fparser.html
 # TODO: rinda https://docs.ruby-lang.org/ja/latest/library/rinda=2frinda.html
 # TODO: rubygems https://docs.ruby-lang.org/ja/latest/library/rubygems.html
+# TODO: mkmf https://docs.ruby-lang.org/ja/latest/library/mkmf.html
 
 module Equire
   SimpleModules = %i[
@@ -74,8 +75,154 @@ module Equire
 
   InstanceMethods = [
     [IO, :expect, 'expect'],
-    [Time, :to_json, 'json']
+
+    [IO, :cooked, 'io/console'],
+    [IO, :cooked!, 'io/console'],
+    [IO, :echo=, 'io/console'],
+    [IO, :echo?, 'io/console'],
+    [IO, :getch, 'io/console'],
+    [IO, :iflush, 'io/console'],
+    [IO, :ioflush, 'io/console'],
+    [IO, :noecho, 'io/console'],
+    [IO, :oflush, 'io/console'],
+    [IO, :raw, 'io/console'],
+    [IO, :raw!, 'io/console'],
+    [IO, :winsize, 'io/console'],
+    [IO, :winsize=, 'io/console'],
+
+    [String, :iseuc, 'kconv'],
+    [String, :isjis, 'kconv'],
+    [String, :issjis, 'kconv'],
+    [String, :isutf8, 'kconv'],
+    [String, :kconv, 'kconv'],
+    [String, :toeuc, 'kconv'],
+    [String, :tojis, 'kconv'],
+    [String, :tolocale, 'kconv'],
+    [String, :tosjis, 'kconv'],
+    [String, :toutf16, 'kconv'],
+    [String, :toutf32, 'kconv'],
+    [String, :toutf8, 'kconv'],
+
+    [Time, :to_date, 'date'],
+    [Time, :to_datetime, 'date'],
+    [Time, :to_time, 'date'],
+
+    [Time, :httpdate, 'time'],
+    [Time, :iso8601, 'time'],
+    [Time, :rfc2822, 'time'],
+
+    [Binding, :irb, 'irb'],
+
+    [Kernel, :pp, 'pp'],
+    [Object, :pretty_inspect, 'pp'],
+    [Object, :pretty_print, 'pp'],
+    [Object, :pretty_print_cycle, 'pp'],
+    [Object, :pretty_print_inspect, 'pp'],
+    [Object, :pretty_print_instance_variables, 'pp'],
+
+    [Kernel, :Pathname, 'pathname'],
+
+    [Class, :json_creatable?, 'json'],
+    [Kernel, :JSON, 'json'],
+    [Kernel, :j, 'json'],
+    [Kernel, :jj, 'json'],
+    [Exception, :to_json, 'json'],
+    [Range, :to_json, 'json'],
+    [Regexp, :to_json, 'json'],
+    [Struct, :to_json, 'json'],
+    [Time, :to_json, 'json'],
+
+    [Kernel, :psych_y, 'psych'],
+    [Module, :psych_yaml_as, 'psych'],
+    [Object, :psych_to_yaml, 'psych'],
+
+    [IO, :nonblock, 'io/nonblock'],
+    [IO, :nonblock=, 'io/nonblock'],
+    [IO, :nonblock?, 'io/nonblock'],
+
+    [IO, :nread, 'io/wait'],
+    [IO, :ready?, 'io/wait'],
+    [IO, :wait, 'io/wait'],
+    [IO, :wait_writable, 'io/wait'],
+
+    [IO, :scanf, 'scanf'],
+    [Kernel, :scanf, 'scanf'],
+    [String, :scanf, 'scanf'],
+
+    [Kernel, :BigDecimal, 'bigdecimal'],
+
+    [Integer, :prime?, 'prime'],
+    [Integer, :prime_division, 'prime'],
+
+    [Enumerable, :to_set, 'set'],
+
+    [Integer, :to_bn, 'openssl'],
+
+    [Kernel, :URI, 'uri'],
+
+    [Kernel, :Digest, 'digest'],
+
+    [Array, :shelljoin, 'shellwords'],
+    [String, :shellescape, 'shellwords'],
+    [String, :shellsplit, 'shellwords'],
+
+    [Kernel, :timeout, 'timeout'],
+
+    [IO, :pathconf, 'etc'],
+
+    [Array, :abbrev, 'abbrev'],
+
+    [Kernel, :callcc, 'continuation'],
+
+    [Fiber, :alive?, 'fiber'],
+    [Fiber, :transfer, 'fiber'],
+
+    [ObjectSpace, :count_nodes, 'objspace'],
+    [ObjectSpace, :count_objects_size, 'objspace'],
+    [ObjectSpace, :count_tdata_objects, 'objspace'],
+    [ObjectSpace, :memsize_of, 'objspace'],
+    [ObjectSpace, :memsize_of_all, 'objspace'],
+    [ObjectSpace, :reachable_objects_from, 'objspace'],
   ].freeze
+
+  ClassMethods = [
+    [IO, :console, 'io/console'],
+
+    [Time, :httpdate, 'time'],
+    [Time, :iso8601, 'time'],
+    [Time, :parse, 'time'],
+    [Time, :rfc2822, 'time'],
+    [Time, :strptime, 'time'],
+
+    [Kernel, :pp, 'pp'],
+
+    [Dir, :mktmpdir, 'tmpdir'],
+    [Dir, :tmpdir, 'tmpdir'],
+
+    [Exception, :json_create, 'json'],
+    [Range, :json_create, 'json'],
+    [Regexp, :json_create, 'json'],
+    [Struct, :json_create, 'json'],
+    [Time, :json_create, 'json'],
+
+    [Object, :yaml_tag, 'psych'],
+
+    [Kernel, :BigDecimal, 'bigdecimal'],
+
+    [Integer, :each_prime, 'prime'],
+    [Integer, :from_prime_division, 'prime'],
+
+    [Kernel, :URI, 'uri'],
+
+    [Fiber, :current, 'fiber'],
+
+    [ObjectSpace, :count_nodes, 'objspace'],
+    [ObjectSpace, :count_objects_size, 'objspace'],
+    [ObjectSpace, :count_tdata_objects, 'objspace'],
+    [ObjectSpace, :memsize_of, 'objspace'],
+    [ObjectSpace, :memsize_of_all, 'objspace'],
+    [ObjectSpace, :reachable_objects_from, 'objspace'],
+  ]
 
   def Object.const_missing(name)
     case
@@ -94,9 +241,24 @@ module Equire
   InstanceMethods.each do |klass, method, library|
     eval <<~RUBY
       #{klass.is_a?(Class) ? 'class' : 'module'} ::#{klass}
-        def #{method}(*)
+        def #{method}(*args)
+          undef #{method}
           require #{library.inspect}
-          super
+          __send__(#{method.inspect}, *args)
+        end
+      end
+    RUBY
+  end
+
+  ClassMethods.each do |klass, method, library|
+    eval <<~RUBY
+      #{klass.is_a?(Class) ? 'class' : 'module'} ::#{klass}
+        def self.#{method}(*args)
+          class << #{klass}
+            undef #{method}
+          end
+          require #{library.inspect}
+          __send__(#{method.inspect}, *args)
         end
       end
     RUBY
