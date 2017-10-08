@@ -224,19 +224,6 @@ module Equire
     [ObjectSpace, :reachable_objects_from, 'objspace'],
   ]
 
-  def Object.const_missing(name)
-    case
-    when SimpleModules.include?(name)
-      name = name.to_s
-      require name.downcase
-      eval name
-    when lib = Table[name]
-      require lib
-      eval name.to_s
-    else
-      super
-    end
-  end
 
   InstanceMethods.each do |klass, method, library|
     eval <<~RUBY
@@ -263,4 +250,12 @@ module Equire
       end
     RUBY
   end
+end
+
+Equire::SimpleModules.each do |mod|
+  autoload mod, mod.to_s.downcase
+end
+
+Equire::Table.each do |mod, name|
+  autoload mod, name
 end
