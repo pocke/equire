@@ -27,4 +27,10 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler', '~> 1.15'
   spec.add_development_dependency 'rake', '~> 10.0'
+
+  spec.add_development_dependency 'minitest', '~> 5'
+  spec.add_development_dependency "minitest-power_assert", "~> 0.2.0"
+  spec.add_development_dependency "pry"
+  spec.add_development_dependency 'rubocop', '0.50.0'
+  spec.add_development_dependency 'meowcop', '1.12.1'
 end
