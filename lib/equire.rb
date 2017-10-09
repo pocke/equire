@@ -1,4 +1,6 @@
-require "equire/version"
+# frozen_string_literal: true
+
+require 'equire/version'
 
 # TODO: DRb has many modules. https://docs.ruby-lang.org/ja/latest/library/drb.html
 # TODO: net/* https://docs.ruby-lang.org/ja/latest/library/index.html
@@ -31,7 +33,7 @@ module Equire
     Etc Syslog
     WIN32OLE
     Abbrev Base64 Continuation Logger PrettyPrint SecureRandom
-  ]
+  ].freeze
 
   Table = {
     GetoptLong: 'getoptlong',
@@ -70,7 +72,7 @@ module Equire
     WIN32OLE_VARIABLE: 'win32ole',
     WIN32OLE_VARIANT: 'win32ole',
     Exception2MessageMapper: 'e2mmap',
-    OpenStruct: 'ostruct',
+    OpenStruct: 'ostruct'
   }.freeze
 
   InstanceMethods = [
@@ -182,7 +184,7 @@ module Equire
     [ObjectSpace, :count_tdata_objects, 'objspace'],
     [ObjectSpace, :memsize_of, 'objspace'],
     [ObjectSpace, :memsize_of_all, 'objspace'],
-    [ObjectSpace, :reachable_objects_from, 'objspace'],
+    [ObjectSpace, :reachable_objects_from, 'objspace']
   ].freeze
 
   ClassMethods = [
@@ -221,9 +223,8 @@ module Equire
     [ObjectSpace, :count_tdata_objects, 'objspace'],
     [ObjectSpace, :memsize_of, 'objspace'],
     [ObjectSpace, :memsize_of_all, 'objspace'],
-    [ObjectSpace, :reachable_objects_from, 'objspace'],
-  ]
-
+    [ObjectSpace, :reachable_objects_from, 'objspace']
+  ].freeze
 
   InstanceMethods.each do |klass, method, library|
     eval <<~RUBY
