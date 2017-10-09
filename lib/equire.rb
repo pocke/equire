@@ -267,15 +267,17 @@ module Equire
 
   InstanceMethods.each do |library, methods|
     methods.each do |klass, method|
-      eval <<~RUBY
+      next if klass.instance_methods.include?(method)
+
+      eval <<~RUBY, binding, __FILE__, __LINE__ + 1
         #{klass.is_a?(Class) ? 'class' : 'module'} ::#{klass}
           def #{method}(*args)
             #{methods.map do |_klass, m|
-              "undef #{m}"
+            "undef #{m} if ::#{klass}.instance_methods.include?(#{m.inspect})"
             end.join("\n")}
             class << #{klass}
               #{Array(ClassMethods[library]).map do |_klass, m|
-                "undef #{m}"
+                "undef #{m} if defined? ::#{klass}.#{m}"
               end.join("\n")}
             end
             require #{library.inspect}
@@ -288,15 +290,17 @@ module Equire
 
   ClassMethods.each do |library, methods|
     methods.each do |klass, method|
-      eval <<~RUBY
+      next if eval "defined? #{klass}.#{method}"
+
+      eval <<~RUBY, binding, __FILE__, __LINE__ + 1
         #{klass.is_a?(Class) ? 'class' : 'module'} ::#{klass}
           def self.#{method}(*args)
             #{Array(InstanceMethods[library]).map do |_klass, m|
-              "undef #{m}"
+              "undef #{m} if ::#{klass}.instance_methods.include?(#{m.inspect})"
             end.join("\n")}
             class << #{klass}
               #{methods.map do |_klass, m|
-                "undef #{m}"
+                "undef #{m} if defined? ::#{klass}.#{m}"
               end.join("\n")}
             end
             require #{library.inspect}
