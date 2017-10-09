@@ -75,181 +75,236 @@ module Equire
     OpenStruct: 'ostruct'
   }.freeze
 
-  InstanceMethods = [
-    [IO, :expect, 'expect'],
+  InstanceMethods = {
+    'expect' => [
+      [IO, :expect]
+    ],
+    'io/console' => [
+      [IO, :cooked],
+      [IO, :cooked!],
+      [IO, :echo=],
+      [IO, :echo?],
+      [IO, :getch],
+      [IO, :iflush],
+      [IO, :ioflush],
+      [IO, :noecho],
+      [IO, :oflush],
+      [IO, :raw],
+      [IO, :raw!],
+      [IO, :winsize],
+      [IO, :winsize=]
+    ],
+    'kconv' => [
+      [String, :iseuc],
+      [String, :isjis],
+      [String, :issjis],
+      [String, :isutf8],
+      [String, :kconv],
+      [String, :toeuc],
+      [String, :tojis],
+      [String, :tolocale],
+      [String, :tosjis],
+      [String, :toutf16],
+      [String, :toutf32],
+      [String, :toutf8]
+    ],
+    'date' => [
+      [Time, :to_date],
+      [Time, :to_datetime],
+      [Time, :to_time]
+    ],
+    'time' => [
+      [Time, :httpdate],
+      [Time, :iso8601],
+      [Time, :rfc2822]
+    ],
+    'irb' => [
+      [Binding, :irb]
+    ],
+    'pp' => [
+      [Kernel, :pp],
+      [Object, :pretty_inspect],
+      [Object, :pretty_print],
+      [Object, :pretty_print_cycle],
+      [Object, :pretty_print_inspect],
+      [Object, :pretty_print_instance_variables]
+    ],
+    'pathname' => [
+      [Kernel, :Pathname]
+    ],
+    'json' => [
+      [Class, :json_creatable?],
+      [Kernel, :JSON],
+      [Kernel, :j],
+      [Kernel, :jj],
+      [Exception, :to_json],
+      [Range, :to_json],
+      [Regexp, :to_json],
+      [Struct, :to_json],
+      [Time, :to_json]
+    ],
+    'psych' => [
+      [Kernel, :psych_y],
+      [Module, :psych_yaml_as],
+      [Object, :psych_to_yaml]
+    ],
+    'io/nonblock' => [
+      [IO, :nonblock],
+      [IO, :nonblock=],
+      [IO, :nonblock?]
+    ],
+    'io/wait' => [
+      [IO, :nread],
+      [IO, :ready?],
+      [IO, :wait],
+      [IO, :wait_writable]
+    ],
+    'scanf' => [
+      [IO, :scanf],
+      [Kernel, :scanf],
+      [String, :scanf]
+    ],
+    'bigdecimal' => [
+      [Kernel, :BigDecimal]
+    ],
+    'prime' => [
+      [Integer, :prime?],
+      [Integer, :prime_division]
+    ],
+    'set' => [
+      [Enumerable, :to_set]
+    ],
+    'openssl' => [
+      [Integer, :to_bn]
+    ],
+    'uri' => [
+      [Kernel, :URI]
+    ],
+    'digest' => [
+      [Kernel, :Digest]
+    ],
+    'shellwords' => [
+      [Array, :shelljoin],
+      [String, :shellescape],
+      [String, :shellsplit]
+    ],
+    'timeout' => [
+      [Kernel, :timeout]
+    ],
+    'etc' => [
+      [IO, :pathconf]
+    ],
+    'abbrev' => [
+      [Array, :abbrev]
+    ],
+    'continuation' => [
+      [Kernel, :callcc]
+    ],
+    'fiber' => [
+      [Fiber, :alive?],
+      [Fiber, :transfer]
+    ],
+    'objspace' => [
+      [ObjectSpace, :count_nodes],
+      [ObjectSpace, :count_objects_size],
+      [ObjectSpace, :count_tdata_objects],
+      [ObjectSpace, :memsize_of],
+      [ObjectSpace, :memsize_of_all],
+      [ObjectSpace, :reachable_objects_from]
+    ]
+  }.freeze
 
-    [IO, :cooked, 'io/console'],
-    [IO, :cooked!, 'io/console'],
-    [IO, :echo=, 'io/console'],
-    [IO, :echo?, 'io/console'],
-    [IO, :getch, 'io/console'],
-    [IO, :iflush, 'io/console'],
-    [IO, :ioflush, 'io/console'],
-    [IO, :noecho, 'io/console'],
-    [IO, :oflush, 'io/console'],
-    [IO, :raw, 'io/console'],
-    [IO, :raw!, 'io/console'],
-    [IO, :winsize, 'io/console'],
-    [IO, :winsize=, 'io/console'],
+  ClassMethods = {
+    'io/console' => [
+      [IO, :console]
+    ],
+    'time' => [
+      [Time, :httpdate],
+      [Time, :iso8601],
+      [Time, :parse],
+      [Time, :rfc2822],
+      [Time, :strptime]
+    ],
+    'pp' => [
+      [Kernel, :pp]
+    ],
+    'tmpdir' => [
+      [Dir, :mktmpdir],
+      [Dir, :tmpdir]
+    ],
+    'json' => [
+      [Exception, :json_create],
+      [Range, :json_create],
+      [Regexp, :json_create],
+      [Struct, :json_create],
+      [Time, :json_create]
+    ],
+    'psych' => [
+      [Object, :yaml_tag]
+    ],
+    'bigdecimal' => [
+      [Kernel, :BigDecimal]
+    ],
+    'prime' => [
+      [Integer, :each_prime],
+      [Integer, :from_prime_division]
+    ],
+    'uri' => [
+      [Kernel, :URI]
+    ],
+    'fiber' => [
+      [Fiber, :current]
+    ],
+    'objspace' => [
+      [ObjectSpace, :count_nodes],
+      [ObjectSpace, :count_objects_size],
+      [ObjectSpace, :count_tdata_objects],
+      [ObjectSpace, :memsize_of],
+      [ObjectSpace, :memsize_of_all],
+      [ObjectSpace, :reachable_objects_from]
+    ]
+  }.freeze
 
-    [String, :iseuc, 'kconv'],
-    [String, :isjis, 'kconv'],
-    [String, :issjis, 'kconv'],
-    [String, :isutf8, 'kconv'],
-    [String, :kconv, 'kconv'],
-    [String, :toeuc, 'kconv'],
-    [String, :tojis, 'kconv'],
-    [String, :tolocale, 'kconv'],
-    [String, :tosjis, 'kconv'],
-    [String, :toutf16, 'kconv'],
-    [String, :toutf32, 'kconv'],
-    [String, :toutf8, 'kconv'],
-
-    [Time, :to_date, 'date'],
-    [Time, :to_datetime, 'date'],
-    [Time, :to_time, 'date'],
-
-    [Time, :httpdate, 'time'],
-    [Time, :iso8601, 'time'],
-    [Time, :rfc2822, 'time'],
-
-    [Binding, :irb, 'irb'],
-
-    [Kernel, :pp, 'pp'],
-    [Object, :pretty_inspect, 'pp'],
-    [Object, :pretty_print, 'pp'],
-    [Object, :pretty_print_cycle, 'pp'],
-    [Object, :pretty_print_inspect, 'pp'],
-    [Object, :pretty_print_instance_variables, 'pp'],
-
-    [Kernel, :Pathname, 'pathname'],
-
-    [Class, :json_creatable?, 'json'],
-    [Kernel, :JSON, 'json'],
-    [Kernel, :j, 'json'],
-    [Kernel, :jj, 'json'],
-    [Exception, :to_json, 'json'],
-    [Range, :to_json, 'json'],
-    [Regexp, :to_json, 'json'],
-    [Struct, :to_json, 'json'],
-    [Time, :to_json, 'json'],
-
-    [Kernel, :psych_y, 'psych'],
-    [Module, :psych_yaml_as, 'psych'],
-    [Object, :psych_to_yaml, 'psych'],
-
-    [IO, :nonblock, 'io/nonblock'],
-    [IO, :nonblock=, 'io/nonblock'],
-    [IO, :nonblock?, 'io/nonblock'],
-
-    [IO, :nread, 'io/wait'],
-    [IO, :ready?, 'io/wait'],
-    [IO, :wait, 'io/wait'],
-    [IO, :wait_writable, 'io/wait'],
-
-    [IO, :scanf, 'scanf'],
-    [Kernel, :scanf, 'scanf'],
-    [String, :scanf, 'scanf'],
-
-    [Kernel, :BigDecimal, 'bigdecimal'],
-
-    [Integer, :prime?, 'prime'],
-    [Integer, :prime_division, 'prime'],
-
-    [Enumerable, :to_set, 'set'],
-
-    [Integer, :to_bn, 'openssl'],
-
-    [Kernel, :URI, 'uri'],
-
-    [Kernel, :Digest, 'digest'],
-
-    [Array, :shelljoin, 'shellwords'],
-    [String, :shellescape, 'shellwords'],
-    [String, :shellsplit, 'shellwords'],
-
-    [Kernel, :timeout, 'timeout'],
-
-    [IO, :pathconf, 'etc'],
-
-    [Array, :abbrev, 'abbrev'],
-
-    [Kernel, :callcc, 'continuation'],
-
-    [Fiber, :alive?, 'fiber'],
-    [Fiber, :transfer, 'fiber'],
-
-    [ObjectSpace, :count_nodes, 'objspace'],
-    [ObjectSpace, :count_objects_size, 'objspace'],
-    [ObjectSpace, :count_tdata_objects, 'objspace'],
-    [ObjectSpace, :memsize_of, 'objspace'],
-    [ObjectSpace, :memsize_of_all, 'objspace'],
-    [ObjectSpace, :reachable_objects_from, 'objspace']
-  ].freeze
-
-  ClassMethods = [
-    [IO, :console, 'io/console'],
-
-    [Time, :httpdate, 'time'],
-    [Time, :iso8601, 'time'],
-    [Time, :parse, 'time'],
-    [Time, :rfc2822, 'time'],
-    [Time, :strptime, 'time'],
-
-    [Kernel, :pp, 'pp'],
-
-    [Dir, :mktmpdir, 'tmpdir'],
-    [Dir, :tmpdir, 'tmpdir'],
-
-    [Exception, :json_create, 'json'],
-    [Range, :json_create, 'json'],
-    [Regexp, :json_create, 'json'],
-    [Struct, :json_create, 'json'],
-    [Time, :json_create, 'json'],
-
-    [Object, :yaml_tag, 'psych'],
-
-    [Kernel, :BigDecimal, 'bigdecimal'],
-
-    [Integer, :each_prime, 'prime'],
-    [Integer, :from_prime_division, 'prime'],
-
-    [Kernel, :URI, 'uri'],
-
-    [Fiber, :current, 'fiber'],
-
-    [ObjectSpace, :count_nodes, 'objspace'],
-    [ObjectSpace, :count_objects_size, 'objspace'],
-    [ObjectSpace, :count_tdata_objects, 'objspace'],
-    [ObjectSpace, :memsize_of, 'objspace'],
-    [ObjectSpace, :memsize_of_all, 'objspace'],
-    [ObjectSpace, :reachable_objects_from, 'objspace']
-  ].freeze
-
-  InstanceMethods.each do |klass, method, library|
-    eval <<~RUBY
-      #{klass.is_a?(Class) ? 'class' : 'module'} ::#{klass}
-        def #{method}(*args)
-          undef #{method}
-          require #{library.inspect}
-          __send__(#{method.inspect}, *args)
+  InstanceMethods.each do |library, methods|
+    methods.each do |klass, method|
+      eval <<~RUBY
+        #{klass.is_a?(Class) ? 'class' : 'module'} ::#{klass}
+          def #{method}(*args)
+            #{methods.map do |_klass, m|
+              "undef #{m}"
+            end.join("\n")}
+            class << #{klass}
+              #{Array(ClassMethods[library]).map do |_klass, m|
+                "undef #{m}"
+              end.join("\n")}
+            end
+            require #{library.inspect}
+            __send__(#{method.inspect}, *args)
+          end
         end
-      end
-    RUBY
+      RUBY
+    end
   end
 
-  ClassMethods.each do |klass, method, library|
-    eval <<~RUBY
-      #{klass.is_a?(Class) ? 'class' : 'module'} ::#{klass}
-        def self.#{method}(*args)
-          class << #{klass}
-            undef #{method}
+  ClassMethods.each do |library, methods|
+    methods.each do |klass, method|
+      eval <<~RUBY
+        #{klass.is_a?(Class) ? 'class' : 'module'} ::#{klass}
+          def self.#{method}(*args)
+            #{Array(InstanceMethods[library]).map do |_klass, m|
+              "undef #{m}"
+            end.join("\n")}
+            class << #{klass}
+              #{methods.map do |_klass, m|
+                "undef #{m}"
+              end.join("\n")}
+            end
+            require #{library.inspect}
+            __send__(#{method.inspect}, *args)
           end
-          require #{library.inspect}
-          __send__(#{method.inspect}, *args)
         end
-      end
-    RUBY
+      RUBY
+    end
   end
 end
 
