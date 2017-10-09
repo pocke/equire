@@ -4,7 +4,7 @@ require 'minitest/autorun'
 require 'minitest-power_assert'
 
 def ruby_require_e(code, lib: 'equire')
-  sh! 'ruby', "-r#{lib}", '-e', code
+  sh! 'ruby', '-Ilib', "-r#{lib}", '-e', code
 end
 
 def sh!(*cmd)
