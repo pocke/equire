@@ -270,7 +270,14 @@ module Equire
       eval <<~RUBY
         #{klass.is_a?(Class) ? 'class' : 'module'} ::#{klass}
           def #{method}(*args)
-            undef #{method}
+            #{methods.map do |_klass, m|
+              "undef #{m}"
+            end.join("\n")}
+            class << #{klass}
+              #{Array(ClassMethods[library]).map do |_klass, m|
+                "undef #{m}"
+              end.join("\n")}
+            end
             require #{library.inspect}
             __send__(#{method.inspect}, *args)
           end
@@ -284,8 +291,13 @@ module Equire
       eval <<~RUBY
         #{klass.is_a?(Class) ? 'class' : 'module'} ::#{klass}
           def self.#{method}(*args)
+            #{Array(InstanceMethods[library]).map do |_klass, m|
+              "undef #{m}"
+            end.join("\n")}
             class << #{klass}
-              undef #{method}
+              #{methods.map do |_klass, m|
+                "undef #{m}"
+              end.join("\n")}
             end
             require #{library.inspect}
             __send__(#{method.inspect}, *args)
